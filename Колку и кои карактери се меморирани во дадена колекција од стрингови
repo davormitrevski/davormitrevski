@@ -1,0 +1,29 @@
+class Program
+    {
+        List<char> Karakteri(List<string> str)
+        {
+            List<char> karakter = new List<char>();
+            for ( int i = 0; i < str.Count; i++)
+            {
+                for (int j = 0; j < str[i].Length; j++)
+                {
+                    karakter.Add(str[i][j]);
+                }
+            }
+            return karakter;
+        }
+        static void Main(string[] args)
+        {
+            List<string> str = new List<string>() { " Makedonija", " Srbija", " Hrvatska" };
+            List<char> karakter = new List<char>();
+            Program obj = new Program();
+            karakter = obj.Karakteri(str);
+            Console.WriteLine(" Se memorirani " + karakter.Count + "  karakteri vo listata i tie se: ");
+            for (int k = 0; k < karakter.Count; k++)
+            {
+
+                Console.WriteLine(karakter[k]);
+            }
+        }
+    }
+}
