@@ -1,0 +1,48 @@
+class Program
+    {
+        string StringSoNajmnoguUnikati(List<string> str)
+        {
+            int max = 0;
+            string najmnogu = str[0];
+            for (int i = 0; i < str.Count; i++)
+            {
+                int brojac = 0;
+                List<char> unikati = new List<char>();
+                for (int j = 0; j < str[i].Length; j++)
+                {
+                    bool ima = false;
+                    for (int k = 0; k < unikati.Count; k++)
+                    {
+                        if (str[i][j] == unikati[k])
+                        {
+                            ima = true;
+                        }
+                    }
+                    if ( ima == false)
+                    {
+                        unikati.Add(str[i][j]);
+                        brojac++;
+                    }
+                    if (brojac > max)
+                    {
+
+
+                        max = brojac;
+                        najmnogu = str[i];
+                    }
+                }
+            }
+            return najmnogu;
+        }
+       
+        
+        static void Main(string[] args)
+        {
+            List<string> str = new List<string> { " nedela ", "sabOta" , " svajcarija ", " ponedelnik" };
+            string StringSoNajmnoguUnikati;
+            Program obj = new Program();
+            StringSoNajmnoguUnikati = obj.StringSoNajmnoguUnikati(str);
+            Console.WriteLine(" String so najmnogu unikati e: " + StringSoNajmnoguUnikati);
+        }
+    }
+}
