@@ -1,0 +1,26 @@
+using System;
+using System.Collections.Generic;
+namespace Kolku_i_koi_karakteri_se_memorirani
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<string> str = new List<string>() { "ponedelnik", "vtornik", "sreda" };
+            for (int i = 0; i < str.Count; i++)
+            {
+                List<char> karakteri = new List<char>();
+                for(int j =0; j<str[i].Length; j++)
+                {
+                    karakteri.Add(str[i][j]);
+                }
+                Console.WriteLine("vo" + str[i] + " Ima " + str[i].Length + " karakteri, tie se ");
+                for(int k = 0; k< karakteri.Count; k++)
+                {
+                    Console.WriteLine(karakteri[k]);
+                }
+            }
+            
+        }
+    }
+}
