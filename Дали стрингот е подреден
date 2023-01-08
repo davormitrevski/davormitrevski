@@ -1,0 +1,36 @@
+using System;
+using System.Collections.Generic;
+namespace vezbajne
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            char c = 'd';
+            int a = c;
+            string str = "abdcd";
+            bool podreden = true;
+            for (int i = 0; i < str.Length-1; i++)
+            {
+                int ab= str[i];
+                int b = str[i + 1];
+                if(ab>b)
+                
+                {
+                    podreden = false;
+                    break;
+                }
+            }
+            if(podreden == true)
+            {
+                Console.WriteLine(" Stringot e podreden ");
+            }
+            else
+            {
+                Console.WriteLine(" Stringot ne e podreden ");
+            }
+            
+            
+        }
+    }
+}
