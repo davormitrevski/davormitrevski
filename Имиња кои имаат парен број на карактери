@@ -1,0 +1,39 @@
+using System;
+using System.Collections.Generic;
+namespace Imijna_koi_imaat_paren_broj_na_karakt
+{
+    class Program
+    {
+        static bool eparen(string ime)
+        {
+            
+            bool pripagja = false;
+          
+            if (ime.Length %2 == 0)
+            {
+                pripagja = true;
+            }
+
+            return pripagja;
+        }
+            static void Main(string[] args)
+            {
+                List<string> iminja = new List<string>() { "Kire", "Bojan", "Stojan", "Aleksandar" };
+                List<string> parni = new List<string>();
+                bool paren;
+                for (int i = 0; i < iminja.Count; i++)
+                {
+                    paren = eparen(iminja[i]);
+                    if (paren == true)
+                    {
+                        parni.Add(iminja[i]);
+                    }
+
+                }
+                for (int i = 0; i < parni.Count; i++)
+                {
+                    Console.WriteLine(parni[i]);
+                }
+            }
+    }
+}
