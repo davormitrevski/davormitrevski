@@ -1,0 +1,46 @@
+using System;
+using System.IO;
+using System.Collections.Generic;
+namespace Datoteka_da_se_najde_daden_zbor_vo_dat
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<string> iminja = new List<string> { "Viki", "Gabi", "Petar", "Dime", "Nikola" };
+            List<string> ime = new List<string>();
+            string path = @"c:\temp\Iminja.txt";
+            if (!File.Exists(path))
+            {
+                using (StreamWriter sw = File.CreateText(path))
+                {
+                    for (int i = 0; i < iminja.Count; i++)
+                    {
+                        sw.WriteLine(iminja[i]);
+                    }
+                }
+            }
+            using (StreamReader sr = File.OpenText(path))
+            {
+                string s;
+                while ((s = sr.ReadLine()) != null)
+                {
+                    ime.Add(s);
+                }
+            }
+            string imee = Console.ReadLine();
+            bool postoi = false;
+            for (int i = 0; i < ime.Count; i++)
+            {
+                if (ime[i] == imee)
+                    postoi = true;
+                else
+                    postoi = false;
+            }
+            if (postoi == true)
+                Console.WriteLine(ime);
+            else
+                Console.WriteLine("Imeto ne postoi");
+        }
+    }
+}
