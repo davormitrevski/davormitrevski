@@ -1,0 +1,87 @@
+using System;
+using System.Collections.Generic;
+namespace vezba
+{
+    class Program
+    {
+
+        struct DveNajvozrasni
+        {
+            public string ime;
+            public string prezime;
+            public int godini;
+        }
+        int index1;
+        int index2;
+        int max1;
+        int max2;
+        List<DveNajvozrasni> DveLicnosti(List<DveNajvozrasni> listaLicnosti)
+        {
+           
+            List<DveNajvozrasni> listavrednosti = new List<DveNajvozrasni>();
+            for (int i = 0; i < listaLicnosti[i].godini; i++)
+            if (listaLicnosti[i].godini < listaLicnosti[i+1].godini)
+            {
+                    max1 = listaLicnosti[i+1].godini;
+                    max2 = listaLicnosti[i].godini;
+                    index1 = i;
+                    index2 = i + 1;
+
+            }
+            for (int i = 2; i < listaLicnosti.Count; i++)
+            {
+
+                if (max1 < listaLicnosti[i].godini)
+                {
+                    max2 = max1;
+                    index2 = index1;
+                    max1 = listaLicnosti[i].godini;
+                    index1 = i;
+
+
+
+                }
+                else
+                {
+                    
+                    if (max1 == listaLicnosti[i].godini)
+                    {
+                        continue;
+                    }
+                    if (max2 < listaLicnosti[i].godini)
+                    {
+                        max2 = listaLicnosti[i].godini;
+                        index2 = i;
+                    }
+                }
+            }
+            listavrednosti.Add(listaLicnosti[index1]);
+            listavrednosti.Add(listaLicnosti[index2]);
+            return listavrednosti;
+        }
+        static void Main(string[] args)
+        {
+            Program obj = new Program();
+            DveNajvozrasni lik;
+
+            List<DveNajvozrasni> listaLicnosti = new List<DveNajvozrasni>();
+            List<DveNajvozrasni> listaposledna = new List<DveNajvozrasni>();
+            Console.WriteLine("Vnesete ime, prezime i godini za licnostite");
+
+            for (int i = 0; i < 5; i++)
+            {
+                lik.ime = Console.ReadLine();
+                lik.prezime = Console.ReadLine();
+                lik.godini = Convert.ToInt32(Console.ReadLine());
+
+                listaLicnosti.Add(lik);
+            }
+
+            listaposledna = obj.DveLicnosti(listaLicnosti);
+            for (int i = 0; i < listaposledna.Count; i++)
+            {
+                Console.WriteLine(listaposledna[i].ime + " " + listaposledna[i].prezime + " " + listaposledna[i].godini);
+            }
+        }
+    }
+}
