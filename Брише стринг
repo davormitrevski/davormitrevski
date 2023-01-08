@@ -1,0 +1,50 @@
+using System;
+using System.Collections.Generic;
+
+namespace Brise_string_Test
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<char> brisi = new List<char>() { 'a', 'b', 'c', 'd', 'a' };
+            string removeStr = "";
+            string pronajdi = "abc";
+            List<int> indexi = new List<int>();
+            string temp = "";
+            for (int i = 0; i < brisi.Count - pronajdi.Length + 1; i++)
+            {
+                int brojac = 0;
+                for (int j = 0; j < pronajdi.Length; j++)
+                {
+                    if (brisi[i + j] == pronajdi[j])
+                    {
+                        temp = temp + brisi[i + j];
+                        brojac++;
+                    }
+                    if (brojac == pronajdi.Length)
+                    {
+                        temp = "";
+                        indexi.Add(i);
+                    }
+                }
+            }
+            for (int i = 0; i < brisi.Count; i++)
+            {
+                for (int k = 0; k < indexi.Count; k++)
+                {
+                    if (indexi[k] == i)
+                    {
+                        i = i + pronajdi.Length;
+                    }
+                }
+                if (i == brisi.Count)
+                {
+                    break;
+                }
+                removeStr = removeStr + brisi[i];
+            }
+            Console.WriteLine(removeStr);
+        }
+    }
+}
