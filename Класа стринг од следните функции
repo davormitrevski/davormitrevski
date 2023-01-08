@@ -1,0 +1,352 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+namespace Clasa_String
+{
+    class Program
+    {
+           struct Lista
+            {
+               public string strr;
+               public string vid;
+            }
+        class MojotString
+        {
+
+
+            public string str;
+            public MojotString(string mstr)
+            {
+                str = mstr;
+            }
+            public int BrojNaKarakteri()
+            {
+                return str.Length;
+            }
+            public void Kokupatisepovkarakter()
+            {
+                SortedList<char, int> karakter = new SortedList<char, int>();
+                for (int i = 0; i < str.Length; i++)
+                {
+                    if (!karakter.ContainsKey(str[i]))
+                    {
+                        karakter[str[i]] = 1;
+                    }
+                    else
+                    {
+                        karakter[str[i]]++;
+                    }
+                }
+                for (int i = 0; i < karakter.Count; i++)
+                {
+                    Console.WriteLine("{0} {1} pati.", karakter.Keys[i], karakter.Values[i]);
+                }
+            }
+            public void Kojkaraktersepovnajmnogu()
+            {
+                SortedList<char, int> Karakter = new SortedList<char, int>();
+                for (int i = 0; i < str.Length; i++)
+                {
+                    if (!Karakter.ContainsKey(str[i]))
+                    {
+                        Karakter[str[i]] = 1;
+                    }
+                    else
+                    {
+                        Karakter[str[i]]++;
+                    }
+                }
+                int max = Karakter.Values[0];
+                char Karakter1 = ' ';
+                for (int i = 0; i < Karakter.Count; i++)
+                {
+
+
+                    if (max < Karakter.Values[i])
+                    {
+                        max = Karakter.Values[i];
+                        Karakter1 = Karakter.Keys[i];
+                    }
+                }
+                Console.WriteLine(Karakter1 + " " + max + " pati. ");
+            }
+            public List<string> Rastechki()
+            {
+                List<string> rastechkiNizi = new List<string>();
+                string novString = "";
+                for (int i = 0; i < str.Length - 1; i++)
+                {
+                    if (novString == "")
+                    {
+                        novString = str[i].ToString();
+                    }
+                    int c1 = str[i];
+                    int c2 = str[i + 1];
+
+                    if (c1 < c2)
+                    {
+                        novString = novString + str[i + 1];
+                        if (i + 1 == str.Length - 1)
+                        {
+                            if (novString.Length > 1)
+                            {
+                                rastechkiNizi.Add(novString);
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (novString.Length > 1)
+                        {
+                            rastechkiNizi.Add(novString);
+                            novString = "";
+                        }
+                        else
+                        {
+                            novString = "";
+                        }
+                    }
+                }
+                return rastechkiNizi;
+            }
+            public List<string> Opagachki()
+            {
+                List<string> opagachkiNizi = new List<string>();
+                string novString = "";
+                for (int i = 0; i < str.Length - 1; i++)
+                {
+                    if (novString == "")
+                    {
+                        novString = str[i].ToString();
+                    }
+                    int c1 = str[i];
+                    int c2 = str[i + 1];
+
+                    if (c1 > c2)
+                    {
+                        novString = novString + str[i + 1];
+                        if (i + 1 == str.Length - 1)
+                        {
+                            if (novString.Length > 1)
+                            {
+                                opagachkiNizi.Add(novString);
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (novString.Length > 1)
+                        {
+                            opagachkiNizi.Add(novString);
+                            novString = "";
+                        }
+                        else
+                        {
+                            novString = "";
+                        }
+                    }
+                }
+                return opagachkiNizi;
+            }
+            public List<Lista> RasteckiIOpajgacki()
+            {
+                Lista lis;
+                List<Lista> listalis = new List<Lista>();
+
+                List<string> opagjachki = new List<string>();
+                List<string> rastechki = new List<string>();
+                int c1 = str[0];
+                int c2 = str[1];
+                for (int i = 0; i < str.Length; i++)
+                {
+                    bool eTemp = false;
+                    string temp = str[i].ToString();
+                    for (int j = i; j < str.Length; j++)
+                    {
+                        if (j + 1 != str.Length)
+                        {
+                            if (c1 < c2)
+                            {
+                                c1 = str[j];
+                                c2 = str[j + 1];
+                                if (c1 < c2)
+                                {
+                                    temp += str[j + 1];
+                                }
+                                else
+                                {
+                                    if (temp.Length > 1)
+                                    {
+                                        rastechki.Add(temp);
+
+                                        eTemp = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            else if (c1 > c2)
+                            {
+                                c1 = str[j];
+                                c2 = str[j + 1];
+                                if (c1 > c2)
+                                {
+                                    temp += str[j + 1];
+                                }
+                                else
+                                {
+                                    if (temp.Length > 1)
+                                    {
+                                        opagjachki.Add(temp);
+
+                                        eTemp = true;
+                                        break;
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                    if (eTemp)
+                    {
+                        i += temp.Length - 2;
+                    }
+                }
+
+                for (int i = 0; i < rastechki.Count; i++)
+                {
+                    lis.strr = rastechki[i];
+                    lis.vid = "Rastechki podstring";
+
+                    listalis.Add(lis);
+                }
+                for (int i = 0; i < opagjachki.Count; i++)
+                {
+                    lis.strr = opagjachki[i];
+                    lis.vid = "Opagjachki podstring";
+
+                    listalis.Add(lis);
+                }
+
+                return listalis;
+            }
+            public string PostoiStr(string podstr)
+            {
+                int brojacpod = 0;
+                string broj = "";
+                for (int i = 0; i < str.Length - podstr.Length + 1; i++)
+                {
+                    int brojac = 0;
+                    for (int j = 0; j < podstr.Length; j++)
+                    {
+                        if (str[i + j] == podstr[j])
+                            brojac++;
+                    }
+                    if (brojac == podstr.Length)
+                    {
+                        brojacpod++;
+                        i = i + podstr.Length - 1;
+                    }
+
+                }
+                broj = brojacpod.ToString();
+
+                if (broj == "0")
+                {
+                    broj = "Nema takov string";
+                }
+                else
+                {
+                    broj += " pati.";
+                }
+                return broj;
+            }
+            public void ReplaceInString(string smeni, string zamena)
+            {
+                int pamtindex = 0;
+                for (int i = 0; i < str.Length; i++)
+                {
+                    string temp = "";
+                    for (int j = i; j < str.Length; j++)
+                    {
+                        temp += str[j];
+                        if (temp.Length == smeni.Length && temp == smeni)
+                        {
+                            pamtindex = i;
+                            break;
+                        }
+                    }
+                }
+                string soZamena = "";
+                for (int i = 0; i < str.Length; i++)
+                {
+                    if (i == pamtindex)
+                    {
+                        soZamena += zamena;
+                        i += zamena.Length;
+                    }
+
+                    soZamena += str[i];
+                }
+                str = soZamena;
+                Console.WriteLine($"Uspeshno go zamenevte zborot {smeni}");
+                Console.WriteLine("Stringot posle izmenata izgleda vaka: ");
+                Console.WriteLine(str);
+            }
+        }
+        static void Main(string[] args)
+        {
+            MojotString obj = new MojotString("abcdeaduefhsueabcabc");
+            Console.WriteLine("1. Brojot na karakteri na stringot e: " + obj.BrojNaKarakteri());
+            Console.WriteLine();
+
+            Console.WriteLine("2. Koj karakter kolku pati se povtoruva:");
+            obj.Kokupatisepovkarakter();
+            Console.WriteLine();
+
+            Console.WriteLine("3. Najmnogu pati se povtoruva karakterot: ");
+            obj.Kojkaraktersepovnajmnogu();
+            Console.WriteLine();
+
+
+            Console.WriteLine("4. Rastecki podnizi se: ");
+            List<string> rastecki = new List<string>();
+            rastecki = obj.Rastechki();
+            for (int i = 0; i < rastecki.Count; i++)
+            {
+                Console.WriteLine(rastecki[i]);
+            }
+            Console.WriteLine();
+            Console.WriteLine("5. Opagachki podnizi se: ");
+            List<string> opagjacki = new List<string>();
+            opagjacki = obj.Opagachki();
+            for (int i = 0; i < opagjacki.Count; i++)
+            {
+                Console.WriteLine(opagjacki[i]);
+            }
+            Console.WriteLine();
+            Console.WriteLine("6. Rastechki i Opajgacki podnizi se: ");
+            List<Lista> RastiOpajgjacki = new List<Lista>();
+            RastiOpajgjacki = obj.RasteckiIOpajgacki();
+            for (int i = 0; i < RastiOpajgjacki.Count; i++)
+            {
+                Console.WriteLine(RastiOpajgjacki[i].strr + " " + RastiOpajgjacki[i].vid);
+                
+            }
+            Console.WriteLine();
+            Console.WriteLine("7. Vnesi podstring za da proverime dali postoi: ");
+            string podstr = Console.ReadLine();
+            string postoi = obj.PostoiStr(podstr);
+            Console.WriteLine(postoi);
+
+            Console.WriteLine();
+            Console.WriteLine("8. Zamenuva odreden podstring so drug:");
+            Console.WriteLine("Vnesete podstring od stringot koj sakate da go zamenite:");
+            string zaMenuvanje = Console.ReadLine();
+            Console.WriteLine("Vnesete string koj sakate da go stavite na negovoto mesto:");
+            string zamena = Console.ReadLine();
+            obj.ReplaceInString(zaMenuvanje, zamena);
+        }
+    }
+}
