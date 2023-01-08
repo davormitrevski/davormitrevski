@@ -1,0 +1,217 @@
+using System;
+using System.Collections.Generic;
+
+namespace Nasleduvajne_2_Klasi
+{
+    class Program
+    {
+        class A
+        {
+            protected string mystr;
+
+
+            public void setMojStr(string mojstr)
+            {
+                mystr = mojstr;
+            }
+            public int Dolzina()
+            {
+                return mystr.Length;
+            }
+            public string PostoiStr(string substr)
+            {
+                string ima = "";
+                bool postoi = false;
+                string tmp = "";
+                for (int i = 0; i < mystr.Length - substr.Length + 1; i++)
+                {
+
+                    for (int j = 0; j < substr.Length; j++)
+                    {
+                        if (mystr[i + j] == substr[j])
+                        {
+                            tmp += substr[j];
+                            if (tmp == substr)
+                            {
+                                postoi = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (postoi == true)
+                {
+                    ima = "Stringot postoi.";
+                }
+                else
+                {
+                    ima = "Stringot ne posti";
+                }
+                return ima;
+            }
+            public int KolkuPati(string substr)
+            {
+                int brojac = 0;
+                string tmp = "";
+                for (int i = 0; i < mystr.Length - substr.Length + 1; i++)
+                {
+                    for (int j = 0; j < substr.Length; j++)
+                    {
+                        if (mystr[i + j] == substr[j])
+                        {
+                            tmp += substr[j];
+                            if (tmp.Length == substr.Length && tmp == substr)
+                            {
+                                brojac++;
+                                tmp = "";
+                            }
+                        }
+                    }
+                }
+                return brojac;
+            }
+            public string Delete(string b)
+            {
+                string temp = null;
+                for (int i = 0; i < mystr.Length; i++)
+                {
+                    if (i + b.Length == mystr.Length)
+                    {
+                        if (mystr.Substring(i, b.Length) != b)
+                        {
+                            temp += mystr.Substring(i, b.Length);
+                        }
+                        break;
+                    }
+                    if (mystr.Substring(i, b.Length) != b)
+                    {
+                        temp += mystr[i];
+                    }
+                    else
+                    {
+                        i += b.Length - 1;
+                    }
+                }
+                return temp;
+            }
+        }
+        class B : A
+        {
+
+            public string MaxString()
+            {
+                string maxstr = "";
+                string tmp = "";
+                List<string> rastecki = new List<string>();
+                for (int i = 0; i < mystr.Length - 1; i++)
+                {
+                    int c1 = mystr[i];
+                    int c2 = mystr[i + 1];
+
+                    if (tmp.Length < 1)
+                    {
+                        tmp += mystr[i];
+                    }
+                    if (c1 < c2)
+                    {
+                        tmp += mystr[i + 1];
+                    }
+                    else
+                    {
+                        if (tmp.Length > 1)
+                        {
+                            rastecki.Add(tmp);
+
+                            tmp = "";
+                        }
+                    }
+
+                }
+                for (int i = 0; i < rastecki.Count; i++)
+                {
+                    if (rastecki[i].Length > maxstr.Length)
+                    {
+                        maxstr = rastecki[i];
+                    }
+                }
+
+                return maxstr;
+            }
+            public string MinString()
+            {
+                string minstr = "";
+                string tmp = "";
+                List<string> rastecki = new List<string>();
+                for (int i = 0; i < mystr.Length - 1; i++)
+                {
+                    int c1 = mystr[i];
+                    int c2 = mystr[i + 1];
+
+                    if (tmp.Length < 1)
+                    {
+                        tmp += mystr[i];
+                    }
+                    if (c1 > c2)
+                    {
+                        tmp += mystr[i + 1];
+                    }
+                    else
+                    {
+                        if (tmp.Length > 1)
+                        {
+                            rastecki.Add(tmp);
+
+                            tmp = "";
+                        }
+                    }
+                }
+                for (int i = 0; i < rastecki.Count; i++)
+                {
+                    if (rastecki[i].Length > minstr.Length)
+                    {
+                        minstr = rastecki[i];
+                    }
+                }
+                return minstr;
+            }
+            public string Replace(string b, string c)
+            {
+                string temp = null;
+                for (int i = 0; i < mystr.Length; i++)
+                {
+                    if (i + b.Length == mystr.Length)
+                    {
+                        if (mystr.Substring(i, b.Length) == b)
+                        {
+                            temp += c;
+                        }
+                        break;
+                    }
+                    if (mystr.Substring(i, b.Length) != b)
+                    {
+                        temp += mystr[i];
+                    }
+                    else
+                    {
+                        temp += c;
+                        i += c.Length - 1;
+                    }
+                }
+                return temp;
+            }
+        }
+        static void Main(string[] args)
+        {
+            B b = new B();
+            b.setMojStr("abcfoeskfeobcsabac");
+            Console.WriteLine(b.Dolzina());
+            Console.WriteLine(b.PostoiStr("abc"));
+            Console.WriteLine(b.KolkuPati("abc"));
+            Console.WriteLine(b.Delete("skf"));
+            Console.WriteLine(b.MaxString());
+            Console.WriteLine(b.MinString());
+            Console.WriteLine(b.Replace("ab", "bc"));
+           
+        }
+    }
+}
