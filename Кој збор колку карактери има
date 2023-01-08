@@ -1,0 +1,30 @@
+using System;
+using System.Collections.Generic;
+namespace Sorted_list___koj_zbor_kolku_karak_ima_vo_rec
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string recenica = "ponedelnik den za programiranje";
+            SortedList<string, int> brkarakteri = new SortedList<string, int>();
+            List<string> zbor = new List<string>(recenica.Split(' '));
+
+            for (int i = 0; i < zbor.Count; i++)
+            {
+                string str = zbor[i];
+                int len = str.Length;
+
+                if (!brkarakteri.ContainsKey(str))
+                {
+                    brkarakteri[str] = len;
+                }
+
+            }
+            for (int i = 0; i < brkarakteri.Count; i++)
+            {
+                Console.WriteLine("Kluc : {0} ,Vrednost : {1}", brkarakteri.Keys[i], brkarakteri.Values[i]);
+            }
+        }
+    }
+}
