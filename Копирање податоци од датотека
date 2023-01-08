@@ -1,0 +1,28 @@
+using System;
+using System.IO;
+namespace Datoteka_kopirajne_podatoci_vo_datoteka
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string path = @"c:\temp\MyTest.txt";
+            string pathC = @"c:\temp\temp\MyTest.txt";
+            if (File.Exists(path))
+                    
+            {
+                File.Copy(path, pathC);
+            }
+               
+            
+            using (StreamReader sr = File.OpenText(path))
+            {
+                string s;
+                while ((s = sr.ReadLine()) != null)
+                {
+                    Console.WriteLine(s);
+                }
+            }
+        }
+    }
+}
