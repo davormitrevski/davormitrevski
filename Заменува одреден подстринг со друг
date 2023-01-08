@@ -1,0 +1,61 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Zamenuva_odrede_podstring_so_drug
+{
+    class Program
+    {
+        public void ReplaceString()
+        {
+            List<char> karakteri = new List<char>() { 'a', 'b', 'a', 'b', 'c' };
+            string replaceStr = "";
+            string pronajdi = "abc";
+            string zameni = "eee";
+            List<int> indexi = new List<int>();
+            string temp = "";
+            for (int i = 0; i < karakteri.Count - pronajdi.Length + 1; i++)
+            {
+                int brojac = 0;
+                for (int j = 0; j < pronajdi.Length; j++)
+                {
+                    if (karakteri[i + j] == pronajdi[j])
+                    {
+                        temp = temp + karakteri[i + j];
+                        brojac++;
+                    }
+                    if (brojac == pronajdi.Length)
+                    {
+                        temp = "";
+                        indexi.Add(i);
+                    }
+                }
+            }
+            for (int i = 0; i < karakteri.Count; i++)
+            {
+                for (int k = 0; k < indexi.Count; k++)
+                {
+                    if (indexi[k] == i)
+                    {
+                        replaceStr = replaceStr + zameni;
+                        i = i + zameni.Length;
+                    }
+                }
+                if (i == karakteri.Count)
+                {
+                    break;
+                }
+                replaceStr = replaceStr + karakteri[i];
+            }
+            Console.WriteLine("Noviot string posle zamenata e: " + replaceStr);
+        }
+    
+        static void Main(string[] args)
+        {
+            Program obj = new Program();
+            obj.ReplaceString();
+        }
+    }
+}
