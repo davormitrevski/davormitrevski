@@ -1,0 +1,106 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+
+namespace T7_D7_10._02._2022
+{
+    class Program
+    {
+        class MojotString
+        {
+            string str;
+            public MojotString(string mstr)
+            {
+                str = mstr;
+            }
+            public void RasPodstring()
+            {
+                List<string> rasteckiString = new List<string>();
+                string novStr = "";
+                for (int i = 0; i < str.Length - 1; i++)
+                {
+                    if (novStr == "")
+                        novStr = novStr + str[i].ToString();
+                    int c1, c2;
+                    c1 = str[i];
+                    c2 = str[i + 1];
+
+                    if (c1 < c2)
+                    {
+                        novStr = novStr + str[i + 1];
+                    }
+                    else
+                    {
+                        if (novStr.Length > 1)
+                        {
+                            rasteckiString.Add(novStr);
+                            novStr = "";
+                        }
+                        else
+                        {
+                            novStr = "";
+                        }
+                    }
+                }
+                string podstring = " ";
+                for (int i = 0; i < rasteckiString.Count; i++)
+                {
+                    if (podstring.Length < rasteckiString[i].Length)
+                    {
+                        podstring = rasteckiString[i];
+                    }
+                }
+                Console.WriteLine(podstring);
+            }
+            public void OpaPodstring()
+            { 
+                 List<string> rasteckiString = new List<string>();
+            string novStr = "";
+                for (int i = 0; i<str.Length - 1; i++)
+                {
+                    if (novStr == "")
+                        novStr = novStr + str[i].ToString();
+                        int c1, c2;
+                        c1 = str[i];
+                        c2 = str[i + 1];
+
+                    if (c1>c2)
+                    {
+                        novStr = novStr + str[i + 1];
+                    }
+                    else
+                    {
+                        if (novStr.Length > 1)
+                        {
+                            rasteckiString.Add(novStr);
+                            novStr = "";
+                        }
+                        else
+                        {
+                            novStr = "";
+                        }
+                    }
+                }
+                string podstring = " ";
+                for (int i = 0; i < rasteckiString.Count; i++)
+                {
+                     if (podstring.Length < rasteckiString[i].Length)
+                     {
+                         podstring = rasteckiString[i];
+                     }
+                }
+                 Console.WriteLine(podstring);
+            }
+
+        }
+        static void Main(string[] args)
+        {
+            MojotString obj = new MojotString("abcdeaababccduefhsueabcabc");
+            Console.WriteLine("Najdolg rastecki podstring e: ");
+            obj.RasPodstring();
+            Console.WriteLine("Najdolg opajgacki podstring e: ");
+            obj.OpaPodstring();
+
+        }
+    }
+}
