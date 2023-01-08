@@ -1,0 +1,50 @@
+using System;
+using System.Collections.Generic;
+namespace Dva_najgolemi_broevi_koi_pripajgaat_na_fibonaci
+{
+    class Program
+    {
+        static bool eFibonaci(int broj)
+        {
+            int prv = 0;
+            int vtor = 1;
+            bool pripagja = false;
+            int tret = prv + vtor;
+            if(tret == broj)
+            {
+                pripagja = true;
+            }
+            while (tret < broj)
+            {
+                tret = prv + vtor;
+                if (tret == broj)
+                {
+                    pripagja = true;
+                }
+                prv = vtor;
+                vtor = tret;
+               
+            }
+            return pripagja;
+        }
+        static void Main(string[] args)
+        {
+            var numbers = new List<int>();
+            var fibonaci = new List<int>();
+            for (int i = 0; i < 8; i++)
+            {
+                numbers.Add(Convert.ToInt32(Console.ReadLine()));
+            }
+            for (int i = 0; i < numbers.Count; i++)
+            {
+                if (eFibonaci(numbers[i]))
+                {
+                    fibonaci.Add(numbers[i]);
+                }
+            }
+            fibonaci.Sort();
+            fibonaci.Reverse();
+            Console.WriteLine("Dvata najgolemi broevi koi pripajgaat na fibonaci se: " + fibonaci[0] + " i " + fibonaci[1]);
+        }
+    }
+}
