@@ -1,0 +1,173 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+
+namespace P1_Datoteki
+{
+    class Program
+    {
+        static List<string> pateki = new List<string>();
+        static List<string> SearchDir(string path)
+        {
+            
+                foreach (string f in Directory.GetFiles(path))
+                {
+                    if (!pateki.Contains(f))
+                        pateki.Add(f);
+                    else
+                        continue;
+                }
+            
+
+            foreach (string d in Directory.GetDirectories(path))
+            {
+                foreach (string f in Directory.GetFiles(d))
+                {
+                    if (!pateki.Contains(f))
+                        pateki.Add(f);
+                    else
+                        continue;
+                }
+                SearchDir(d);
+            }
+            return pateki;
+        }
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Vnesi 1 za da najdes odredena datoteka.");
+            Console.WriteLine("Vnesi 2 za brishenje odredena datoteka.");
+            Console.WriteLine("Vnesi 3 za da premestish odredena datoteka na druga lokacija.");
+            Console.WriteLine("Vnesi 4 za brishenje na duplikati vo odredena datoteka.");
+            Console.WriteLine("Vnesi 5 za da smneshi lokacija na odreden direktorium.");
+            Console.WriteLine("Vnesi 6 za da najdes datoteka so odredena ekstenzija.");
+            Console.WriteLine("Vnesi 7 za da najdes datoteka so odredena golemina.");
+
+            int izbor = Convert.ToInt32(Console.ReadLine());
+
+            //Baranje 1:
+
+            if (izbor == 1)
+            {
+                Console.WriteLine("Vnesi ime na datoteka : ");
+                string path = @"c:\temp\tekst.txt";
+                string dest = @"c:\temp";
+                string[] fileNames = Directory.GetFiles(@"c:\temp");
+                string imeFile = Console.ReadLine();
+                foreach (string fileName in fileNames)
+                {
+                    if (imeFile == fileName)
+                    {
+                        Console.WriteLine(" Postoi file so takvo ime!" + " " + fileName);
+                        
+                    }
+                    //else
+                    //{
+                    //    Console.WriteLine("Ne postoi file so takvo ime!");
+                    //    break;
+                    //}
+                }
+            }
+
+            //Baranje 2:
+
+            if (izbor == 2)
+            {
+                Console.WriteLine("Vnesi ime na datoteka : ");
+                string[] fileNames = Directory.GetFiles(@"c:\temp");
+                string fileIme = Console.ReadLine();
+                foreach (string fajl in fileNames)
+                {
+                    if (fajl == fileIme)
+                    {
+                        File.Delete(fajl);
+                        Console.WriteLine("Fajlot : {0} e izbrishan.", fileIme);
+                    }
+                }
+            }
+
+            //Baranje 3:
+
+            if (izbor == 3)
+            {
+                Console.WriteLine("Vnesi ime na pocetna pateka i krajna pateka : ");
+                string pathto = Console.ReadLine();
+                string frompath = Console.ReadLine();
+                File.Move(pathto, frompath);
+                Console.WriteLine("Fajlot : {0} e premesten na ovaa pateka : {1}", pathto, frompath);
+            }
+
+            //Baranje 4:
+
+            if (izbor == 4)
+            {
+                Console.WriteLine("Vnesi ime na datoteka:");
+                string dat = Console.ReadLine();
+                Console.WriteLine("Vnesete pateka na direktorium:");
+                string pateka = Console.ReadLine();
+                List<string> fajlovi = new List<string>();
+                fajlovi = SearchDir(pateka);
+                foreach (string a in fajlovi)
+                {
+                    FileInfo files = new FileInfo(a);
+                    string ime = files.Name;
+                    if (ime == dat)
+                    {
+                        Console.WriteLine(a);
+                    }
+                }
+            }
+
+        
+
+            //Baranje 5:
+
+            if (izbor == 5)
+            {
+                Console.WriteLine("Vnesi ime na pocetna pateka i krajna pateka : ");
+                string pathto = Console.ReadLine();
+                string frompath = Console.ReadLine();
+                Directory.Move(pathto, frompath);
+                Console.WriteLine("Direktoriumot e premesten!");
+            }
+
+            //Baranje 6:
+
+            if (izbor == 6)
+            {
+                Console.WriteLine("Vnesi ekstenzija na datoteka : ");
+                string ime = Console.ReadLine();
+                Console.WriteLine("Vnesete pateka na direktorium:");
+                string pateka = Console.ReadLine();
+                List<string> fajlovi = new List<string>();
+                fajlovi = SearchDir(pateka);
+                foreach (string fajl in fajlovi)
+                {
+                    FileInfo fi = new FileInfo(fajl);
+                    string ekstenzija = fi.Extension;
+                    if (ekstenzija == ime)
+                    {
+                        Console.WriteLine(fajl);
+                    }
+                }
+            }
+
+            if (izbor == 7)
+            {
+                Console.WriteLine("Vnesi golemina na datoteka : ");
+                long golemina = Convert.ToInt32(Console.ReadLine());
+
+                string[] fileNames = Directory.GetFiles(@"c:\temp");
+                foreach (string fajl in fileNames)
+                {
+                    FileInfo fi = new FileInfo(fajl);
+                    long size = fi.Length;
+                    Console.WriteLine("Golemina : {0} ", size);
+                    if (golemina == size)
+                    {
+                        Console.WriteLine(fajl);
+                    }
+                }
+            }
+        }
+    }
+}
