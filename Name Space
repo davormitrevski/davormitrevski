@@ -1,0 +1,271 @@
+using System;
+using System.Collections.Generic;
+
+namespace NameSpaceD4
+{
+    class namespace_lc
+    {
+        public void Dolzina()
+        {
+            List<char> karakteri = new List<char>() { 'a','b', 'c', 'd', 'e', 'g','b', 'b', 'b', 'a', 'b', 'c', 'l', 'b', 'a', 'b', 'c' };
+            Console.WriteLine("Dolzinata na stringot e " + karakteri.Count);
+        }
+        public void PostoiStr()
+        {
+            List<char> karakteri = new List<char>() { 'a', 'b', 'c', 'd','c', 'b', 'a', 'b', 'c', 'a', 'b', 'a', 'b', 'c' };
+            string podstr = "abc";
+            for (int i = 0; i < karakteri.Count - podstr.Length + 1; i++)
+            {
+                int brojac = 0;
+                for (int j = 0; j < podstr.Length; j++)
+                {
+                    if (karakteri[i + j] == podstr[j])
+                        brojac++;
+                }
+                if (brojac == podstr.Length)
+                {
+                    Console.WriteLine("Podstringot " + podstr + " postoi");
+                    break;
+                }
+            }
+        }
+        public void KolkuPatiPostoiStr()
+        {
+            List<char> karakteri = new List<char>() { 'a', 'b', 'c', 'd', 'e', 'd', 'a', 'b','a', 'b', 'a', 'b', 'c' };
+            int brojacpod = 0;
+            string podstr = "abc";
+            for (int i = 0; i < karakteri.Count - podstr.Length + 1; i++)
+            {
+                int brojac = 0;
+                for (int j = 0; j < podstr.Length; j++)
+                {
+                    if (karakteri[i + j] == podstr[j])
+                        brojac++;
+                }
+                if (brojac == podstr.Length)
+                {
+                    brojacpod++;
+                }
+            }
+            string brojacStr = brojacpod.ToString();
+            if (brojacpod == '0')
+            {
+                brojacStr = "Nema takov string";
+                Console.WriteLine(brojacStr);
+            }
+            else
+            {
+                brojacStr = brojacStr + " pati";
+                Console.WriteLine("Podstringot " + podstr + " se pojavuva " + brojacStr);
+            }
+        }
+        public void BrisheString()
+        {
+            List<char> karakteri = new List<char>() { 'a', 'b', 'c', 'b', 'a', 'b', 'c', 'a', 'b', 'a', 'b', 'c' };
+            string removeStr = "";
+            string pronajdi = "abc";
+            List<int> indexi = new List<int>();
+            string temp = "";
+            for (int i = 0; i < karakteri.Count - pronajdi.Length + 1; i++)
+            {
+                int brojac = 0;
+                for (int j = 0; j < pronajdi.Length; j++)
+                {
+                    if (karakteri[i + j] == pronajdi[j])
+                    {
+                        temp = temp + karakteri[i + j];
+                        brojac++;
+                    }
+                    if (brojac == pronajdi.Length)
+                    {
+                        temp = "";
+                        indexi.Add(i);
+                    }
+                }
+            }
+            for (int i = 0; i < karakteri.Count; i++)
+            {
+                for (int k = 0; k < indexi.Count; k++)
+                {
+                    if (indexi[k] == i)
+                    {
+                        i = i + pronajdi.Length;
+                    }
+                }
+                if (i == karakteri.Count)
+                {
+                    break;
+                }
+                removeStr = removeStr + karakteri[i];
+            }
+            Console.WriteLine("Noviot string posle brishenjeto na podstringot " + pronajdi + " e " + removeStr);
+        }
+    }
+}
+namespace max_RO
+{
+    class namespace_mro
+    {
+        public void RastechkiPodstr()
+        {
+            List<char> karakteri = new List<char>() { 'b', 'a', 'b', 'c', 'a', 'b', 'a', 'b', 'c' };
+            string maxStrR = "";
+            int maxR = 0;
+            List<string> rastechkiPodstring = new List<string>();
+            string temp = "";
+            for (int i = 0; i < karakteri.Count - 1; i++)
+            {
+                if (temp == "")
+                {
+                    temp = karakteri[i].ToString();
+                }
+                int c1 = karakteri[i];
+                int c2 = karakteri[i + 1];
+                if (c1 < c2)
+                {
+                    temp = temp + karakteri[i + 1];
+                    if (i + 1 == karakteri.Count - 1)
+                    {
+                        if (temp.Length > 1)
+                        {
+                            rastechkiPodstring.Add(temp);
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    if (temp.Length > 1)
+                    {
+                        rastechkiPodstring.Add(temp);
+                        temp = "";
+                    }
+                    else
+                    {
+                        temp = "";
+                    }
+                }
+            }
+            for (int i = 0; i < rastechkiPodstring.Count; i++)
+            {
+                if (maxR < rastechkiPodstring[i].Length)
+                {
+                    maxR = rastechkiPodstring[i].Length;
+                    maxStrR = rastechkiPodstring[i];
+                }
+            }
+            Console.WriteLine("Najdolg rastechki podstring e " + maxStrR);
+        }
+        public void OpagachkiPodstr()
+        {
+            List<char> karakteri = new List<char>() {'b', 'c', 'a', 'b', 'a', 'b', 'c' };
+            string maxStrO = "";
+            int maxO = 0;
+            List<string> opagachkiPodstring = new List<string>();
+            string temp = "";
+            for (int i = 0; i < karakteri.Count - 1; i++)
+            {
+                if (temp == "")
+                {
+                    temp = karakteri[i].ToString();
+                }
+                int c1 = karakteri[i];
+                int c2 = karakteri[i + 1];
+                if (c1 > c2)
+                {
+                    temp = temp + karakteri[i + 1];
+                    if (i + 1 == karakteri.Count - 1)
+                    {
+                        if (temp.Length > 1)
+                        {
+                            opagachkiPodstring.Add(temp);
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    if (temp.Length > 1)
+                    {
+                        opagachkiPodstring.Add(temp);
+                        temp = "";
+                    }
+                    else
+                    {
+                        temp = "";
+                    }
+                }
+            }
+            for (int i = 0; i < opagachkiPodstring.Count; i++)
+            {
+                if (maxO < opagachkiPodstring[i].Length)
+                {
+                    maxO = opagachkiPodstring[i].Length;
+                    maxStrO = opagachkiPodstring[i];
+                }
+            }
+            Console.WriteLine("Najdolg opajgachki podstring e " + maxStrO);
+        }
+        public void ReplaceString()
+        {
+            List<char> karakteri = new List<char>() {'a', 'b', 'a', 'b', 'c' };
+            string replaceStr = "";
+            string pronajdi = "abc";
+            string zameni = "eee";
+            List<int> indexi = new List<int>();
+            string temp = "";
+            for (int i = 0; i < karakteri.Count - pronajdi.Length + 1; i++)
+            {
+                int brojac = 0;
+                for (int j = 0; j < pronajdi.Length; j++)
+                {
+                    if (karakteri[i + j] == pronajdi[j])
+                    {
+                        temp = temp + karakteri[i + j];
+                        brojac++;
+                    }
+                    if (brojac == pronajdi.Length)
+                    {
+                        temp = "";
+                        indexi.Add(i);
+                    }
+                }
+            }
+            for (int i = 0; i < karakteri.Count; i++)
+            {
+                for (int k = 0; k < indexi.Count; k++)
+                {
+                    if (indexi[k] == i)
+                    {
+                        replaceStr = replaceStr + zameni;
+                        i = i + zameni.Length;
+                    }
+                }
+                if (i == karakteri.Count)
+                {
+                    break;
+                }
+                replaceStr = replaceStr + karakteri[i];
+            }
+            Console.WriteLine("Noviot string posle zamenata na " + pronajdi + " so " + zameni + " e " + replaceStr);
+        }
+    }
+}
+namespace D2_17._02._2022
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            NameSpaceD4.namespace_lc lc = new NameSpaceD4.namespace_lc();
+            lc.Dolzina();
+            lc.PostoiStr();
+            lc.KolkuPatiPostoiStr();
+            lc.BrisheString();
+            max_RO.namespace_mro mro = new max_RO.namespace_mro();
+            mro.RastechkiPodstr();
+            mro.OpagachkiPodstr();
+            mro.ReplaceString();
+        }
+    }
+}
