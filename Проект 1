@@ -1,0 +1,477 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+namespace Proekt_1
+{
+    class Program
+    {
+        struct Licnost
+        {
+            public string ime;
+            public string prezime;
+            public int godini;
+            public string mesto;
+            public string rabotnaOrganizacija;
+            public string fakultet;
+        }
+        static bool Ime(string ime, string path)
+        {
+            Licnost lic;
+            bool postoi = false;
+            using (StreamReader sr = File.OpenText(path))
+            {
+                string s;
+                while ((s = sr.ReadLine()) != null)
+                {
+                    lic.ime = s;
+
+                    if (ime == lic.ime)
+                    {
+                        postoi = true;
+                        break;
+                    }
+                }
+            }
+            return postoi;
+        }
+        static bool ImePrezime(string ime, string prezime, string path)
+        {
+            Licnost lic;
+            bool postoi = false;
+            using (StreamReader sr = File.OpenText(path))
+            {
+                string s;
+                while ((s = sr.ReadLine()) != null)
+                {
+                    lic.ime = s;
+                    lic.prezime = sr.ReadLine();
+
+                    if (ime == lic.ime && prezime == lic.prezime)
+                    {
+                        postoi = true;
+                        break;
+                    }
+                }
+            }
+            return postoi;
+
+        }
+        static bool ImePrezimeGodini(string ime, string prezime, int godini, string path)
+        {
+
+            Licnost lic;
+            bool postoi = false;
+            using (StreamReader sr = File.OpenText(path))
+            {
+                string s;
+                while ((s = sr.ReadLine()) != null)
+                {
+                    lic.ime = s;
+                    lic.prezime = sr.ReadLine();
+                    bool isParsable = Int32.TryParse(sr.ReadLine(), out lic.godini);
+                    if (isParsable)
+                    {
+                        // Console.WriteLine(lic.godini);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Could not be parsed.");
+                    }
+
+                    if (ime == lic.ime && prezime == lic.prezime && godini == lic.godini)
+                    {
+                        postoi = true;
+                        break;
+                    }
+                }
+            }
+            return postoi;
+        }
+        static List<Licnost> LicnostiGodini(int godini, string path)
+        {
+
+            Licnost lic;
+            List<Licnost> licnosti = new List<Licnost>();
+
+            using (StreamReader sr = File.OpenText(path))
+            {
+                string s;
+                while ((s = sr.ReadLine()) != null)
+                {
+                    lic.ime = s;
+                    lic.prezime = sr.ReadLine();
+                    bool isParsable = Int32.TryParse(sr.ReadLine(), out lic.godini);
+                    if (isParsable)
+                    {
+                        // Console.WriteLine(lic.godini);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Could not be parsed.");
+                        for (int i = 0; i < 3; i++)
+                        {
+                            string prodolzi = sr.ReadLine();
+                        }
+                        continue;
+                    }
+                    lic.mesto = sr.ReadLine();
+                    lic.rabotnaOrganizacija = sr.ReadLine();
+                    lic.fakultet = sr.ReadLine();
+                    if (godini == lic.godini)
+                    {
+                        licnosti.Add(lic);
+                    }
+                }
+            }
+
+            return licnosti;
+        }
+        static List<Licnost> LicnostiMesto(string mesto, string path)
+        {
+            Licnost lic;
+            List<Licnost> licnosti = new List<Licnost>();
+
+            using (StreamReader sr = File.OpenText(path))
+            {
+                string s;
+                while ((s = sr.ReadLine()) != null)
+                {
+                    lic.ime = s;
+                    lic.prezime = sr.ReadLine();
+                    bool isParsable = Int32.TryParse(sr.ReadLine(), out lic.godini);
+                    if (isParsable)
+                    {
+                        // Console.WriteLine(lic.godini);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Could not be parsed.");
+                        for (int i = 0; i < 3; i++)
+                        {
+                            string prodolzi = sr.ReadLine();
+                        }
+                        continue;
+                    }
+                    lic.mesto = sr.ReadLine();
+                    lic.rabotnaOrganizacija = sr.ReadLine();
+                    lic.fakultet = sr.ReadLine();
+                    if (mesto == lic.mesto)
+                    {
+                        licnosti.Add(lic);
+                    }
+                }
+            }
+
+            return licnosti;
+        }
+        static List<Licnost> LicnostiMestoGodini(string mesto, int godini, string path)
+        {
+            Licnost lic;
+            List<Licnost> licnosti = new List<Licnost>();
+
+            using (StreamReader sr = File.OpenText(path))
+            {
+                string s;
+                while ((s = sr.ReadLine()) != null)
+                {
+                    lic.ime = s;
+                    lic.prezime = sr.ReadLine();
+                    bool isParsable = Int32.TryParse(sr.ReadLine(), out lic.godini);
+                    if (isParsable)
+                    {
+                        // Console.WriteLine(lic.godini);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Could not be parsed.");
+                        for (int i = 0; i < 3; i++)
+                        {
+                            string prodolzi = sr.ReadLine();
+                        }
+                        continue;
+                    }
+                    lic.mesto = sr.ReadLine();
+                    lic.rabotnaOrganizacija = sr.ReadLine();
+                    lic.fakultet = sr.ReadLine();
+                    if (mesto == lic.mesto && godini == lic.godini)
+                    {
+                        licnosti.Add(lic);
+                    }
+                }
+            }
+
+            return licnosti;
+        }
+        static List<Licnost> LicnostiFakultet(string fakultet, string path)
+        {
+            Licnost lic;
+            List<Licnost> licnosti = new List<Licnost>();
+
+            using (StreamReader sr = File.OpenText(path))
+            {
+                string s;
+                while ((s = sr.ReadLine()) != null)
+                {
+                    lic.ime = s;
+                    lic.prezime = sr.ReadLine();
+                    bool isParsable = Int32.TryParse(sr.ReadLine(), out lic.godini);
+                    if (isParsable)
+                    {
+                        // Console.WriteLine(lic.godini);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Could not be parsed.");
+                        for (int i = 0; i < 3; i++)
+                        {
+                            string prodolzi = sr.ReadLine();
+                        }
+                        continue;
+                    }
+                    lic.mesto = sr.ReadLine();
+                    lic.rabotnaOrganizacija = sr.ReadLine();
+                    lic.fakultet = sr.ReadLine();
+                    if (fakultet == lic.fakultet)
+                    {
+                        licnosti.Add(lic);
+                    }
+                }
+            }
+
+            return licnosti;
+        }
+        static List<Licnost> LicnostiMestoFakultet(string mesto, string fakultet, string path)
+        {
+            Licnost lic;
+            List<Licnost> licnosti = new List<Licnost>();
+
+            using (StreamReader sr = File.OpenText(path))
+            {
+                string s;
+                while ((s = sr.ReadLine()) != null)
+                {
+                    lic.ime = s;
+                    lic.prezime = sr.ReadLine();
+                    bool isParsable = Int32.TryParse(sr.ReadLine(), out lic.godini);
+                    if (isParsable)
+                    {
+                        // Console.WriteLine(lic.godini);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Could not be parsed.");
+                        for (int i = 0; i < 3; i++)
+                        {
+                            string prodolzi = sr.ReadLine();
+                        }
+                        continue;
+                    }
+                    lic.mesto = sr.ReadLine();
+                    lic.rabotnaOrganizacija = sr.ReadLine();
+                    lic.fakultet = sr.ReadLine();
+                    if (mesto == lic.mesto && fakultet == lic.fakultet)
+                    {
+                        licnosti.Add(lic);
+                    }
+                }
+            }
+
+            return licnosti;
+        }
+        static void Zapishi(List<Licnost> listLicnost, string path)
+        {
+            if (!File.Exists(path))
+            {
+                using (StreamWriter sw = File.CreateText(path))
+                {
+                    for (int i = 0; i < listLicnost.Count; i++)
+                    {
+                        sw.WriteLine(listLicnost[i].ime);
+                        sw.WriteLine(listLicnost[i].prezime);
+                        sw.WriteLine(listLicnost[i].godini);
+                        sw.WriteLine(listLicnost[i].mesto);
+                        sw.WriteLine(listLicnost[i].rabotnaOrganizacija);
+                        sw.WriteLine(listLicnost[i].fakultet);
+                    }
+                }
+            }
+            else
+            {
+                using (StreamWriter sw = File.CreateText(path))
+                {
+                    for (int i = 0; i < listLicnost.Count; i++)
+                    {
+                        sw.WriteLine(listLicnost[i].ime);
+                        sw.WriteLine(listLicnost[i].prezime);
+                        sw.WriteLine(listLicnost[i].godini);
+                        sw.WriteLine(listLicnost[i].mesto);
+                        sw.WriteLine(listLicnost[i].rabotnaOrganizacija);
+                        sw.WriteLine(listLicnost[i].fakultet);
+                    }
+                }
+            }
+        }
+        static void Pechati(List<Licnost> listLicnosti)
+        {
+            for (int i = 0; i < listLicnosti.Count; i++)
+            {
+                //Gi pechatime licnostite od listata
+                Console.WriteLine(listLicnosti[i].ime + " " + listLicnosti[i].prezime + " " + listLicnosti[i].godini + " " + listLicnosti[i].mesto + " "
+                    + listLicnosti[i].rabotnaOrganizacija + " " + listLicnosti[i].fakultet);
+            }
+        }
+        static void Main(string[] args)
+        {
+            Licnost lic;
+            List<Licnost> licList = new List<Licnost>();
+
+            //Pateka od kade se zemaat podatocite
+            string path = @"c:\temp\Proekt1.txt";
+
+            int izbor;
+
+            Console.WriteLine("Moznosti na programata.");
+
+            Console.WriteLine("Vnesete 1 za prebaruvanje po ime.");
+            Console.WriteLine("Vnesete 2 za prebaruvanje po ime i prezime.");
+            Console.WriteLine("Vnesete 3 za prebaruvanje po ime, prezime i godini.");
+            Console.WriteLine("Vnesete 4 za prebaruvanje po odreden broj na godini.");
+            Console.WriteLine("Vnesete 5 za prebaruvanje po licnosti rodeni vo isto mesto.");
+            Console.WriteLine("Vnesete 6 za prebaruvanje po licnosti rodeni vo isto mesto i so ista vozrast.");
+            Console.WriteLine("Vnesete 7 za prebaruvanje po licnosti koi ucat vo ist fakultet.");
+            Console.WriteLine("Vnesete 8 za prebaruvanje po licnosti koi ucat vo ist fakultet i se od isto mesto.");
+
+            izbor = Convert.ToInt32(Console.ReadLine());
+
+            if (izbor == 1)
+            {
+                //Dali postoi licnost so odredeno ime
+
+                bool postoi;
+                string ime;
+                ime = Console.ReadLine();
+                postoi = Ime(ime, path);
+
+                if (postoi = true)
+                {
+                    Console.WriteLine("Postoi lichnost so baranoto ime");
+                }
+                else
+                {
+                    Console.WriteLine("Nema lichnost so baranoto ime");
+                }
+            }
+
+            if (izbor == 2)
+            {
+                //Dali postoi licnost so odredeno ime i prezime
+
+                bool postoi;
+                string ime;
+                string prezime;
+                ime = Console.ReadLine();
+                prezime = Console.ReadLine();
+                postoi = ImePrezime(ime, prezime, path);
+
+                if (postoi = true)
+                {
+                    Console.WriteLine("Postoi lichnost so baranoto ime i prezime");
+                }
+                else
+                {
+                    Console.WriteLine("Nema lichnost so baranoto ime i prezime");
+                }
+            }
+
+            if (izbor == 3)
+            {
+                //Dali postoi licnost so odredeno ime, prezime i godini
+
+                bool postoi;
+                string ime;
+                string prezime;
+                int godini;
+                ime = Console.ReadLine();
+                prezime = Console.ReadLine();
+                godini = Convert.ToInt32(Console.ReadLine());
+                postoi = ImePrezimeGodini(ime, prezime, godini, path);
+
+                if (postoi = true)
+                {
+                    Console.WriteLine("Postoi lichnost so baranoto ime, prezime i godini");
+                }
+                else
+                {
+                    Console.WriteLine("Nema lichnost so baranoto ime, prezime i godini");
+                }
+            }
+
+            if (izbor == 4)
+            {
+                //Licnosti so odreden broj na godini
+
+                string pathLicnostiGodini = @"c:\temp\LicnostiSoOdredenBrojNaGodini.txt";
+                int godini;
+                godini = Convert.ToInt32(Console.ReadLine());
+                licList = LicnostiGodini(godini, path);
+
+                //Povikuvate funkcija za zapisuvanje na podatocite vo datoteka
+                Zapishi(licList, pathLicnostiGodini);
+
+                Pechati(licList);
+            }
+
+            if (izbor == 5)
+            {
+                //Licnosti rodeni vo isto mesto
+
+                string pathMesto = @"c:\temp\LicnostiRodeniVoIstoMesto.txt";
+                string mesto;
+                mesto = Console.ReadLine();
+                licList = LicnostiMesto(mesto, path);
+                Zapishi(licList, pathMesto);
+                Pechati(licList);
+            }
+
+            if (izbor == 6)
+            {
+                //Licnosti rodeni vo isto mesto i so ista vozrast
+
+                string pathMestoVozrast = @"c:\temp\LicnostiRodeniVoIstoMestoIVozrast.txt";
+                string mesto;
+                int godini;
+                mesto = Console.ReadLine();
+                godini = Convert.ToInt32(Console.ReadLine());
+                licList = LicnostiMestoGodini(mesto, godini, path);
+                Zapishi(licList, pathMestoVozrast);
+                Pechati(licList);
+            }
+
+            if (izbor == 7)
+            {
+                //Licnosti koi ucat vo ist fakultet
+
+                string pathFakultet = @"c:\temp\LicnostiVoIstFakultet.txt";
+                string fakultet;
+                fakultet = Console.ReadLine();
+                licList = LicnostiFakultet(fakultet, path);
+                Zapishi(licList, pathFakultet);
+                Pechati(licList);
+            }
+
+            if (izbor == 8)
+            {
+                //Licnosti koi ucat vo ist fakultet i se od isto mesto
+
+                string pathFakultetMesto = @"c:\temp\LicnostiVoIstFakultetMesto.txt";
+                string fakultet;
+                string mesto;
+                fakultet = Console.ReadLine();
+                mesto = Console.ReadLine();
+                licList = LicnostiMestoFakultet(fakultet, mesto, path);
+                Zapishi(licList, pathFakultetMesto);
+                Pechati(licList);
+            }
+        }
+    }
+}
