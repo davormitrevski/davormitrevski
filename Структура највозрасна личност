@@ -1,0 +1,44 @@
+using System;
+using System.Collections.Generic;
+namespace Struktura_Najvozrasnata_Licnost
+{
+    class Program
+    {
+        struct Licnost
+        {
+        public string ime;
+        public string prezime;
+        public int godini;
+        }
+    static void Main(string[] args)
+        {
+            Licnost lic;
+            List<Licnost> listLic = new List<Licnost>();
+            Console.WriteLine("Vnesete ime, prezime i godini na licnosta. ");
+
+            for (int i = 0; i < 3; i++)
+            {
+
+                lic.ime = Console.ReadLine();
+                lic.prezime = Console.ReadLine();
+                lic.godini = Convert.ToInt32(Console.ReadLine());
+                listLic.Add(lic);
+            } 
+            int index = 0;
+            int max = listLic[0].godini;
+            for (int i = 0; i < listLic.Count; i++)
+            {
+
+
+                    if (max < listLic[i].godini)
+                    {
+                        max = listLic[i].godini;
+                        index = i;
+                    }
+               
+            }
+                Console.Write( "Najmnogu godini ima: " + listLic[index].ime + " " + listLic[index].prezime + " " + listLic[index].godini + "");
+                Console.WriteLine();
+            }
+    }
+}
